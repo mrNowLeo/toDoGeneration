@@ -1,0 +1,16 @@
+.randomPhrase_writer {
+  text-align: right;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.randomPhrase_text {
+  font-size: 19px;
+  text-align: center;
+}
+
+blockquote {
+  font-family: "Mein";
+  width: 495px;
+}

@@ -1,4 +1,14 @@
-.login-form, .reg-form {
+.Form_background {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Form_login-form, .Form_reg-form {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
@@ -7,26 +17,25 @@
   height: 150px;
   padding: 15px 20px;
   justify-content: space-around;
-  margin: auto;
 }
 
-.reg-form {
+.Form_reg-form {
   height: 250px;
 }
 
-.input-default {
+.Form_input-default {
   padding: 10px;
   border-radius: 5px;
   border: 2px solid white;
   outline: none;
 }
 
-.button-form {
+.Form_button-form {
   display: flex;
   justify-content: space-between;
 }
 
-.button-login {
+.Form_button-login {
   border-radius: 5px;
   border: none;
   padding: 10px 20px;
@@ -36,17 +45,17 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.button-login:hover {
+.Form_button-login:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.button-register {
+.Form_button-register {
   font-size: 14px;
   text-decoration: none;
   color: white;
   padding: 10px 7px 10px 20px;
 }
 
-.button-register:hover {
+.Form_button-register:hover {
   text-decoration: underline;
 }
