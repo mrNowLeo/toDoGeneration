@@ -4,22 +4,22 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Route, BrowserRouter} from 'react-router-dom';
 import Registration from './pages/Registration';
-import Login from "./pages/Login";
-import Day from "./pages/Day";
+import Login from './pages/Login';
+import Day from './pages/Day';
 
 ReactDOM.render(
   <BrowserRouter>
     <Route
       component={Registration}
-      path="/reg"
+      path='/reg'
     />
     <Route
       component={Login}
-      path="/login"
+      path='/login'
     />
     <Route
       component={Day}
-      path="/day"
+      path='/day'
     />
   </BrowserRouter>, 
   document.getElementById('root'));

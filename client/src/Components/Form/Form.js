@@ -1,8 +1,40 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import './Form.css';
 import RandomPhrase from '../RandomPhrase/RandomPhraze';
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.state = {
+      login:'',
+      password:''
+    };
+  }
+
+  handleLoginChange(e) {
+    this.setState({login:e.target.value})
+  }
+  handlePasswordChange(e) {
+    this.setState({password:e.target.value})
+  }
+  
+  signIn() {
+    axios.post('http://localhost:3001/signin', {
+      login: this.state.login,
+      password: this.state.password
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });       
+  }
+
   render() {
     if (this.props.type === 'reg') {
       return (
@@ -25,10 +57,10 @@ class Form extends Component {
       <div className="Form_background">
         <RandomPhrase/>
         <form className="Form_login-form">
-          <input type="text" name="login" className="Form_input-default" placeholder="Login" />
-          <input type="password" name="password" className="Form_input-default" placeholder="Password" />
+          <input type="text" onChange={this.handleLoginChange} name="login" className="Form_input-default" placeholder="Login" />
+          <input type="password" onChange={this.handlePasswordChange} name="password" className="Form_input-default" placeholder="Password" />
           <div className="ws-flexbox Form_button-form">
-            <button type="submit" name="Login" className="Form_button-login">Login</button>
+            <button type="button" name="Login" onClick={this.signIn} className="Form_button-login">Login</button>
             <a href="/reg" className="Form_button-register">Register</a>
           </div>
         </form>
