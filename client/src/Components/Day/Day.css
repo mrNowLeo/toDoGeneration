@@ -1,0 +1,8 @@
+.Day_page {
+    height: 100%;
+}
+.Day_items-container {
+    display: flex;
+    
+    width: 2000px;
+}

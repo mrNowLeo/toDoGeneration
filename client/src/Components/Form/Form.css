@@ -59,3 +59,8 @@
 .Form_button-register:hover {
   text-decoration: underline;
 }
+
+.Form_error-message {
+  color: red;
+  
+}

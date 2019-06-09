@@ -1,10 +1,16 @@
 const express = require('express');
+const fs = require('fs');
+const bodyParser = require("body-parser");
+const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
 
-var cors = require('cors');
+let sessions;
 
 app.use(cors());
+app.use(session({secret: 'my-secret'}));
+app.use(bodyParser.json());
 
 app.set("port", process.env.PORT || 3001);
 
@@ -17,14 +23,12 @@ app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
 });
 
+const db = require('./server/dbConnection');
+
 app.post('/signin', function (req, res) {
-  var user_name = req.body.login;
-  console.log(req);
-  var password=req.body.password;
-  if(user_name=='admin' && password=='admin'){
-      res.send('success');
-  }
-  else{
-    res.send('Failure');
-  }
+  sessions = req.session;
+  const login = req.body.login;
+  const password = req.body.password;
+
+  db.checkUserData(login, password, () => {sessions.username = login; res.send('success')}, () => {res.send('Failure')});
 })

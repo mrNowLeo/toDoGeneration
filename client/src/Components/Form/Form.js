@@ -10,29 +10,35 @@ class Form extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.signIn = this.signIn.bind(this);
     this.state = {
-      login:'',
-      password:''
+      login: '',
+      password: '',
+      errorMessage: ''
     };
   }
 
   handleLoginChange(e) {
-    this.setState({login:e.target.value})
+    this.setState({login: e.target.value})
   }
   handlePasswordChange(e) {
-    this.setState({password:e.target.value})
+    this.setState({password: e.target.value})
   }
   
   signIn() {
+    const self = this;
     axios.post('http://localhost:3001/signin', {
       login: this.state.login,
       password: this.state.password
     })
     .then(function (response) {
-      console.log(response);
+      if(response.data === 'success') {
+        window.location.assign('http://localhost:3000/day');
+      } else {
+        self.setState({errorMessage: 'Не правильный логин или пароль'})
+      }
     })
     .catch(function (error) {
       console.log(error);
-    });       
+    });
   }
 
   render() {
@@ -57,10 +63,11 @@ class Form extends Component {
       <div className="Form_background">
         <RandomPhrase/>
         <form className="Form_login-form">
-          <input type="text" onChange={this.handleLoginChange} name="login" className="Form_input-default" placeholder="Login" />
-          <input type="password" onChange={this.handlePasswordChange} name="password" className="Form_input-default" placeholder="Password" />
+          <input type="text" onChange={this.handleLoginChange} className="Form_input-default" placeholder="Login" />
+          <input type="password" onChange={this.handlePasswordChange} className="Form_input-default" placeholder="Password" />
+          <div className="Form_error-message" name="error">{this.state.errorMessage}</div>
           <div className="ws-flexbox Form_button-form">
-            <button type="button" name="Login" onClick={this.signIn} className="Form_button-login">Login</button>
+            <button type="button" onClick={this.signIn} className="Form_button-login">Login</button>
             <a href="/reg" className="Form_button-register">Register</a>
           </div>
         </form>

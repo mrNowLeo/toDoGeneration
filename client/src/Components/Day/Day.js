@@ -69,16 +69,32 @@ class Day extends Component {
       ],
       date: date.toLocaleString("ru", options)
     }
+    this.countPercents();
   }
+
+  countPercents() {
+    const MINUTES_IN_PERCENT = 24 * 60 / 100;
+    this.state.items.forEach((item) => {
+      const timeStart = new Date('9.10.2014 ' + item.timeStart);
+      const timeStartInMinutes = timeStart.getHours() * 60 + timeStart.getMinutes();
+      const timeStop = new Date('9.10.2014 ' + item.timeStop);
+      const timeStopInMinutes = timeStop.getHours() * 60 + timeStop.getMinutes();
+
+      item.containerSize = (timeStopInMinutes - timeStartInMinutes) / MINUTES_IN_PERCENT;
+    })
+  }
+
   render() {
     return (
-      <div className="day_">
+      <div className="Day_page">
         <h2 className="day_today">{this.state.date}</h2>
-        {this.state.items.map((item, key) => (
-          <div key={key}>
-            {item.name}
-          </div>
-        ))}
+        <div className="Day_items-container">
+          {this.state.items.map((item, key) => (
+            <div style={{minHeight: item.containerSize + '%'}} key={key}>
+              {item.name}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
